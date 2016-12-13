@@ -16,3 +16,5 @@
     }
 
     require("../models/api1.php");
+    require("../models/api2.php");
+    require("../models/api3.php");
