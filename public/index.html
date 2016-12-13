@@ -36,16 +36,7 @@
             <input type="submit" value="Send">
         </form>
 
-        <div class="displayNice">
-            <div class="item">
-                <div class="itemPicture">
-                    <img src="" alt="imgProfile">
-                </div>
-                <div class="itemInfo">
-                    <p>name: &nbsp;</p><br>
-                    <p id="gender">gender: &nbsp;</p><br>
-                </div>
-            </div>
+        <div class="displayNice" id="display">
         </div>
         <div class="displaySource"></div>
     </div>
@@ -54,16 +45,44 @@
         "use strict";
         var form = document.getElementById("formApi");
         form.onsubmit = function() {
+            document.getElementById('display').innerHTML = '';
             var nb = document.getElementById("inputApi").value;
             var xhr = new XMLHttpRequest();
             xhr.onload = function(){
-                 console.log(xhr.responseText);
+                var response = xhr.responseText;
+                 var JsonResponse = JSON.parse(response);
+                displayResponse(JsonResponse);
             };
             xhr.open("GET", "api.php?nb=" + nb, true);
             xhr.send();
             return false;
         }
-    </script>
+        function displayResponse(response) {
+            for(var i=0; i < response.length;i++) {
+                var obj = response[i];
+                console.log(obj);
+
+                var accountID = document.createElement('div');
+                accountID.setAttribute('class', 'item');
+
+                var ImageDiv = document.createElement('div');
+                ImageDiv.innerHTML = "<img src='" + obj.image + "' alt='userImage'>";
+
+                var genderP = document.createElement('p');
+                genderP.innerHTML = obj.gender;
+
+                var nameP = document.createElement('p');
+                nameP.innerHTML = obj.name;
+
+                var display = document.getElementById('display');
+
+                display.appendChild(accountID);
+                accountID.appendChild(ImageDiv);
+                accountID.appendChild(nameP);
+                accountID.appendChild(genderP);
+            }
+        }
+        </script>
 
 </div>
 </body>
