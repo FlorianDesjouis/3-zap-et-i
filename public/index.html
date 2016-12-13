@@ -21,7 +21,7 @@
                 </a>
             </li>
             <li>
-                <a href="#">
+                <a id="sourceBtn" href="#">
                     <span>SourceView</span>
                 </a>
             </li>
@@ -36,22 +36,28 @@
             <input type="submit" value="Send">
         </form>
 
-        <div class="displayNice" id="display">
-        </div>
-        <div class="displaySource"></div>
+        <div class="displaySource" id="displaySource"></div>
+        <div class="displayNice" id="display"></div>
+
     </div>
 
     <script>
         "use strict";
         var form = document.getElementById("formApi");
+        var btnSource = document.getElementById("sourceBtn");
+        var sourceDisplay = document.getElementById("displaySource");
+        var btnNice = document.getElementById("firstLink");
+        var niceDisplay = document.getElementById("display");
+
         form.onsubmit = function() {
             document.getElementById('display').innerHTML = '';
             var nb = document.getElementById("inputApi").value;
             var xhr = new XMLHttpRequest();
             xhr.onload = function(){
                 var response = xhr.responseText;
-                 var JsonResponse = JSON.parse(response);
+                var JsonResponse = JSON.parse(response);
                 displayResponse(JsonResponse);
+                sourceDisplay.innerHTML = JSON.stringify(JsonResponse);
             };
             xhr.open("GET", "api.php?nb=" + nb, true);
             xhr.send();
@@ -82,6 +88,15 @@
                 accountID.appendChild(genderP);
             }
         }
+        btnSource.onclick = function(){
+            sourceDisplay.style.display = "block";
+            niceDisplay.style.display = "none";
+        }
+        btnNice.onclick = function(){
+            sourceDisplay.style.display = "none";
+            niceDisplay.style.display = "block";
+        }
+
         </script>
 
 </div>
