@@ -1,7 +1,7 @@
 <?php
     if(isset($_GET["nb"])){
         $nb_users = $_GET["nb"];
-        if(isNaN($nb_users)){
+        if(is_nan($nb_users)){
             http_response_code(400);
             die("400 Bad Request: Parameter nb is of invalid type.");
         }
