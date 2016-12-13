@@ -18,3 +18,20 @@
     require("../models/api1.php");
     require("../models/api2.php");
     require("../models/api3.php");
+
+$finalArray = array();
+for($y = 0; $y < $nb_users; $y++){
+    if(!isset($names_list[$y])){
+        $names_list[$y] = "unknown";
+    }
+    if(!isset($images_list[$y])){
+        $images_list[$y] = "unknown";
+    }
+    if(!isset($genders_list[$y])){
+        $genders_list[$y] = "unknown";
+    }
+    array_push($finalArray, array("name" => $names_list[$y], "image" => $images_list[$y], "gender" => $genders_list[$y]));
+}
+
+http_response_code(200);
+echo(json_encode($finalArray));

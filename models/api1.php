@@ -11,7 +11,6 @@ $nameJson = json_decode($response);
 
 $results = $nameJson->results;
 
-var_dump($results);
 
 $names_list = array();
 $firstnames_list = array();
@@ -20,6 +19,3 @@ for ($i = 0; $i < count($results); $i++) {
     array_push($names_list, $results[$i]->name->first.' '.$results[$i]->name->last);
     array_push($firstnames_list, $results[$i]->name->first);
 }
-
-var_dump($names_list);
-var_dump($firstnames_list);
