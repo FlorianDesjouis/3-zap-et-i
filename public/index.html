@@ -29,11 +29,13 @@
     </div>
 
     <div class="main-content">
-        <form action="api.php" method="get">
+
+        <form id="formApi" action="api.php" method="get">
             Account Number<br>
-            <input type="text" maxlength="3" name="account"><br>
+            <input id="inputApi" type="text" maxlength="3" name="account"><br>
             <input type="submit" value="Send">
         </form>
+
         <div class="displayNice">
             <div class="item">
                 <div class="itemPicture">
@@ -47,6 +49,21 @@
         </div>
         <div class="displaySource"></div>
     </div>
+
+    <script>
+        "use strict";
+        var form = document.getElementById("formApi");
+        form.onsubmit = function() {
+            var nb = document.getElementById("inputApi").value;
+            var xhr = new XMLHttpRequest();
+            xhr.onload = function(){
+                 console.log(xhr.responseText);
+            };
+            xhr.open("GET", "api.php?nb=" + nb, true);
+            xhr.send();
+            return false;
+        }
+    </script>
 
 </div>
 </body>
